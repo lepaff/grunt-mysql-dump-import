@@ -1,8 +1,8 @@
 {
-  "name": "grunt-mysql-dump",
+  "name": "grunt-mysql-dump-import",
   "description": "Dump MYSQL databases using Grunt",
   "version": "1.0.0",
-  "homepage": "https://github.com/braznaavtrav/grunt-mysql-dump",
+  "homepage": "https://github.com/braznaavtrav/grunt-mysql-dump-import",
   "author": {
     "name": "Travis McKinney",
     "email": "travis.r.mckinney@gmail.com",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:braznaavtrav/grunt-mysql-dump.git"
+    "url": "git@github.com:braznaavtrav/grunt-mysql-dump-import.git"
   },
   "bugs": {
-    "url": "https://github.com/braznaavtrav/grunt-mysql-dump/issues"
+    "url": "https://github.com/braznaavtrav/grunt-mysql-dump-import/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/braznaavtrav/grunt-mysql-dump/blob/master/LICENSE-MIT"
+      "url": "https://github.com/braznaavtrav/grunt-mysql-dump-import/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",

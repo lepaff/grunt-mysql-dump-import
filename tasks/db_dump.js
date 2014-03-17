@@ -64,7 +64,7 @@ module.exports = function(grunt) {
     var paths = generate_backup_paths(this.target, options);
     
     grunt.log.subhead("Importing database '" + options.title + "' from '" + paths.file + "'");
-    if(db_dump(options, paths))
+    if(db_import(options, paths))
     {
       grunt.log.success("Database dump succesfully imported");
     }
@@ -158,7 +158,7 @@ module.exports = function(grunt) {
       //
       // "Process" the password flag directly in the data hash to avoid a "-p" that would trigger a password prompt
       // in the shell
-        var tpl_mysqldump = grunt.template.process(commandTemplates.mysqlimport, {
+        var tpl_mysqlimport = grunt.template.process(commandTemplates.mysqlimport, {
             data: {
               user: options.user,
               pass: options.pass != "" ? '-p' + options.pass : '',  
@@ -171,10 +171,10 @@ module.exports = function(grunt) {
 
         var file = grunt.file.read(options.backup_to),
             re = new RegExp('XXXSITEURLXXX', "g"),
-            importText = file.output.replace(re, options.site_url);
+            importText = file.replace(re, options.site_url);
 
 
-        grunt.file.write(options.backup_to, file.output);
+        grunt.file.write(options.backup_to, importText);
 
 
 
@@ -182,7 +182,7 @@ module.exports = function(grunt) {
         if (typeof options.ssh_host === "undefined") 
         { 
             // it's a local/direct connection            
-            cmd = tpl_mysqldump;
+            cmd = tpl_mysqlimport;
 
         } 
         else 
@@ -194,7 +194,7 @@ module.exports = function(grunt) {
                 }
             });
             
-            cmd = tpl_ssh + " \\ " + tpl_mysqldump;
+            cmd = tpl_ssh + " \\ " + tpl_mysqlimport;
         }
 
         // Capture output...
@@ -204,13 +204,14 @@ module.exports = function(grunt) {
         grunt.log.error(ret.output)
         return false;
       }
+      else {
+        var file = grunt.file.read(options.backup_to),
+            re = new RegExp(options.site_url, "g"),
+            importText = file.replace(re, 'XXXSITEURLXXX');
 
-      var file = grunt.file.read(options.backup_to),
-          re = new RegExp(options.site_url, "g"),
-          importText = file.output.replace(re, 'XXXSITEURLXXX');
-
-      grunt.file.write(options.backup_to, file.output);
-        
-      return true;
+        grunt.file.write(options.backup_to, importText);
+          
+        return true;
+      }
     }
 };

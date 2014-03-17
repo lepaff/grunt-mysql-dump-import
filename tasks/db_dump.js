@@ -1,8 +1,11 @@
 /*
- * grunt-mysql-dump
+ * grunt-mysql-dump-import
  * https://github.com/digitalcuisine/grunt-mysql-dump
  *
- * Copyright (c) 2013 David Smith, Digital Cuisine
+ * Forked of:
+ * https://github.com/digitalcuisine/grunt-mysql-dump
+ *
+ * Copyright (c) 2014 Travis McKinney
  * Licensed under the MIT license.
  */
 

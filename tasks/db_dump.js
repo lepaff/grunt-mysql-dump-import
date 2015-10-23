@@ -169,15 +169,6 @@ module.exports = function(grunt) {
             }
         });
 
-        var file = grunt.file.read(options.backup_to),
-            re = new RegExp('XXXSITEURLXXX', "g"),
-            importText = file.replace(re, options.site_url);
-
-
-        grunt.file.write(options.backup_to, importText);
-
-
-
         // 3) Test whether we should connect via SSH first
         if (typeof options.ssh_host === "undefined") 
         { 
@@ -203,15 +194,7 @@ module.exports = function(grunt) {
       if(ret.code != 0) {
         grunt.log.error(ret.output)
         return false;
-      }
-      else {
-        var file = grunt.file.read(options.backup_to),
-            re = new RegExp(options.site_url, "g"),
-            importText = file.replace(re, 'XXXSITEURLXXX');
-
-        grunt.file.write(options.backup_to, importText);
-          
-        return true;
-      }
+      }   
+      return true;
     }
 };
